@@ -1,0 +1,17 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /ShopmeAdmin
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopmedb
+    username: shopme
+    password: S_hopme123

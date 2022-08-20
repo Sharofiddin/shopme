@@ -3,6 +3,9 @@ package com.shopme.admin.user;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.shopme.common.entity.User;
 
 @Controller
 public class UserController {
@@ -17,5 +20,19 @@ public class UserController {
     public String listAll(Model model) {
 	model.addAttribute("users", userService.getAllUsers());
 	return "users";
+    }
+    
+    @GetMapping("/users/new")
+    public String createUser(Model model) {
+	model.addAttribute("user", new User());
+	model.addAttribute("roles", userService.getRoleList());
+	return "create_user";
+    }
+    
+    @PostMapping("/users/save")
+    public String saveUser(User user) {
+	System.out.println(user);
+	userService.save(user);
+	return "redirect:/users";
     }
 }

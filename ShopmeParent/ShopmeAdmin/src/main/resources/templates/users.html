@@ -43,8 +43,9 @@
 			</div>
 		</div>
 	</div>
-	<h2>Manage users</h2>
-	<table class="table table-bordered table-responsive-xl table-striped table-hover">
+	<h2 id="users_table_desc">Manage users</h2>
+	<a th:href="@{/users/new}">Create new user</a>
+	<table class="table table-bordered table-responsive-xl table-striped table-hover" aria-describedby="users_table_desc" >
 		<thead class="table-dark">
 			<tr>
 				<th>User ID</th>

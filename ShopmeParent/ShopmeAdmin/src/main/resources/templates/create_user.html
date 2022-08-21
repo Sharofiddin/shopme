@@ -4,6 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
 <title>ShopMe Admin</title>
 </head>
 <body>
@@ -47,7 +48,7 @@
 		</nav>
 	</div>
 	<h2>User management | Create user</h2>
-	<form method="post" th:action="@{/users/save}" th:object="${user}" style="max-width: 700px;margin: 0 auto">
+	<form method="post" th:action="@{/users/save}" th:object="${user}" style="max-width: 700px;margin: 0 auto" onSubmit="return checkEmailUniquiness(this);">
 	<div class="border border-secondary rounded p-3">
 		<div class="row mb-3">
 			<label class="col-form-label-sm col-sm-4" for="email" >E-mail:</label>
@@ -120,6 +121,25 @@
 				});
 			}		
 		);
+		
+		function checkEmailUniquiness(form){
+			url = "[[@{/users/check_email}]]";
+			userEmail = $("#email").val();
+			params = {
+					email: userEmail,
+					_csrf: $("input[name=_csrf]").val()
+			}
+			$.post(url, params, function(response){
+				if(response == 'OK'){
+					
+				} else if(response == 'Duplicated'){
+					form.submit();
+				} else {
+					alert('There is another user with email ' + userEmail);
+				}
+			});
+			return false;
+		};
 	</script>
 </body>
 </html>

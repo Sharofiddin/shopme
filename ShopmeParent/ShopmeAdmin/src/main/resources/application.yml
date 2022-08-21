@@ -15,3 +15,4 @@ spring:
     url: jdbc:mysql://localhost:3306/shopmedb
     username: shopme
     password: S_hopme123
+

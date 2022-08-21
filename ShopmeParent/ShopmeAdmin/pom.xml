@@ -11,6 +11,7 @@
 	<artifactId>shopme-admin</artifactId>
 	<name>ShopmeAdmin</name>
 	<description>Shopme Admin project</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

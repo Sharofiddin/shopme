@@ -13,13 +13,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    public UserService( UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
 	this.userRepository = userRepository;
 	this.roleRepository = roleRepository;
 	this.passwordEncoder = passwordEncoder;
     }
-    
-    public List<User> getAllUsers(){
+
+    public List<User> getAllUsers() {
 	return (List<User>) userRepository.findAll();
     }
 
@@ -31,8 +32,12 @@ public class UserService {
 	encryptUserPassword(user);
 	userRepository.save(user);
     }
-    
+
     public void encryptUserPassword(User user) {
 	user.setPassword(passwordEncoder.encode(user.getPassword()));
+    }
+
+    public boolean isEmailUnique(String email) {
+	return userRepository.getUserByEmail(email) == null;
     }
 }

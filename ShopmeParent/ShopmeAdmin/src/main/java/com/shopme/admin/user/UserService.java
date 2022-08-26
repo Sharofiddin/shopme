@@ -2,6 +2,8 @@ package com.shopme.admin.user;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.shopme.common.entity.User;
 
 @Service
 public class UserService {
+    private static final  Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -38,6 +41,9 @@ public class UserService {
     }
 
     public boolean isEmailUnique(String email) {
-	return userRepository.getUserByEmail(email) == null;
+	logger.info("email {}" , email );
+	User user = userRepository.getUserByEmail(email);
+	logger.info("user {}" , user );
+	return user == null;
     }
 }

@@ -24,7 +24,6 @@ class UserRepositoryTests {
     @Autowired
     private TestEntityManager entityManager;
 
-    
     void testCreateuserWithRole() {
 	Role role = entityManager.find(Role.class, 2);
 	User user = new User("pardayev.sharofiddin@gmail.com", "Sharofiddin", "Pardayev", "1qazxsw2");
@@ -32,7 +31,6 @@ class UserRepositoryTests {
 	user = userRepository.save(user);
 	assertThat(user.getId()).isPositive();
     }
-    
     
     void testCreateuserWithTwoRoles() {
 	

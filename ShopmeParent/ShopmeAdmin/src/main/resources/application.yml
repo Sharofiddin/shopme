@@ -12,7 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/shopmedb
+    url: jdbc:mysql://localhost:3306/shopme
     username: shopme
-    password: S_hopme123
+    password: shopme
 

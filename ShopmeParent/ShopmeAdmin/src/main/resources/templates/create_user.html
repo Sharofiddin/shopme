@@ -107,6 +107,22 @@
 		</div>
 	</form>
 	
+	<div class="modal fade text-center" id="modalDialog">
+		<div  class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 id="modalTitle"></h4>
+					<button type="button" class="close" data-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<span id=modalBody></span>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-danger" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>	
+	</div>
 	<div class="text-center">
 		<p >Company - &copy; ShopMe</p>
 	</div>
@@ -121,7 +137,11 @@
 				});
 			}		
 		);
-		
+		function showModal(header, message){
+			$("#modalTitle").text(header);
+			$("#modalBody").text(header);
+			$("#modalDialog").show();
+		}
 		function checkEmailUniquiness(form){
 			url = "[[@{/users/check_email}]]";
 			userEmail = $("#email").val();
@@ -131,12 +151,14 @@
 			}
 			$.post(url, params, function(response){
 				if(response == 'OK'){
-					
-				} else if(response == 'Duplicated'){
 					form.submit();
-				} else {
-					alert('There is another user with email ' + userEmail);
+				} else if(response == 'Duplicated'){
+					showModal('Warning', 'There is another user with email ' + userEmail);
+				}  else {
+					showModal('Error', 'Server response is invalid');
 				}
+			}).fail(function (){
+				showModal('Error', 'No connection to the server');
 			});
 			return false;
 		};

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.shopme.admin.user.exception.UserNotFoundException;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
@@ -46,4 +47,8 @@ public class UserService {
 	logger.info("user {}" , user );
 	return user == null;
     }
+
+	public User get(Integer id) throws UserNotFoundException {
+		return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User with ID="+id + " not found"));
+	}
 }

@@ -137,11 +137,7 @@
 				});
 			}		
 		);
-		function showModal(header, message){
-			$("#modalTitle").text(header);
-			$("#modalBody").text(header);
-			$("#modalDialog").show();
-		}
+
 		function checkEmailUniquiness(form){
 			url = "[[@{/users/check_email}]]";
 			userEmail = $("#email").val();
@@ -149,11 +145,13 @@
 					email: userEmail,
 					_csrf: $("input[name=_csrf]").val()
 			}
+			showModalDialog('sa', 'sa');
 			$.post(url, params, function(response){
+				
 				if(response == 'OK'){
 					form.submit();
 				} else if(response == 'Duplicated'){
-					showModal('Warning', 'There is another user with email ' + userEmail);
+					showModalDialog('Warning', 'There is another user with email ' + userEmail);
 				}  else {
 					showModal('Error', 'Server response is invalid');
 				}
@@ -162,6 +160,12 @@
 			});
 			return false;
 		};
+		
+		function showModalDialog(header, message){
+			$("#modalTitle").text(header);
+			$("#modalBody").text(message);
+			$("#modalDialog").modal();
+		}
 	</script>
 </body>
 </html>
